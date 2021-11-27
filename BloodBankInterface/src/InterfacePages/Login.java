@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacePages;
-
+package net.codejava.jdbc;
 import java.sql.*;  
+import java.util.Properties;
 /**
  *
  * @author Yashvi
@@ -62,8 +63,6 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(empID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 120, -1));
         getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 120, -1));
-
-        password.setText("jPasswordField1");
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 120, -1));
 
         login.setText("LOGIN");
@@ -75,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
 
         status.setText("  ");
-        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 60, -1));
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -88,13 +87,35 @@ public class Login extends javax.swing.JFrame {
         PreparedStatement pst = null;
         Connection connector = null;
         try{
-            Class.forName("com.postgresql.jdbc.Driver");
-            connector = DriverManager.getConnection("jdbc:postgresql://localhost:5432/BloodBankManagementSystem","postgre","root");
-            pst = connector.prepareStatement("SELECT * FROM \"public\".login LIMIT 100;");
+            DriverManager.registerDriver(new org.postgresql.Driver());
+//          connector = DriverManager.getConnection("jdbc:postgresql://localhost:5432/BloodBankManagementSystem","Postgre","root");
+            String url = "jdbc:postgresql://localhost:5432/BloodBankManagementSystem";
+            Properties parameters = new Properties();
+            parameters.put("user", "postgres");
+            parameters.put("password", "root");
+            connector = DriverManager.getConnection(url, parameters);
+            pst = connector.prepareStatement("SELECT * FROM \"public\".login  WHERE employee_id = ?;");
+            pst.setString(1,empID.getText());
             ResultSet rs = pst.executeQuery();
-            status.setText("Logged In");
+            if (rs.next()){
+                String userField = username.getText();
+                String passField = password.getText();
+                if (userField.equals(rs.getString(2)) && rs.getString(3).equals(passField)){
+                    setVisible(false);
+                    Choose form1 = new Choose();
+                    form1.setVisible(true);
+                }
+                else{
+                    status.setText("Incorrect Password Or Username");
+                }
+            }
+            else{
+                status.setText("Incorrect Employee ID");
+            }
+            pst.close();
+            connector.close();
         }
-        catch(ClassNotFoundException | SQLException e){ System.out.println("ERROR"+ e); }
+        catch(SQLException e){ System.out.println("ERROR"+ e); }
     }//GEN-LAST:event_loginActionPerformed
 
     /**
