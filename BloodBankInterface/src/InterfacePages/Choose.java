@@ -87,7 +87,7 @@ public class Choose extends javax.swing.JFrame {
 
     private void recipeintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipeintActionPerformed
         setVisible(false);
-        Recipeint form1 = new Recipeint();
+        Recipient form1 = new Recipient();
         form1.setVisible(true);
     }//GEN-LAST:event_recipeintActionPerformed
 
