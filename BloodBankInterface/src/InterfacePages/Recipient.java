@@ -167,6 +167,11 @@ public class Recipient extends javax.swing.JFrame {
         });
 
         display.setText("DISPLAY");
+        display.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayActionPerformed(evt);
+            }
+        });
 
         address.setColumns(20);
         address.setRows(5);
@@ -480,6 +485,13 @@ public class Recipient extends javax.swing.JFrame {
     private void hospitalNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitalNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hospitalNameActionPerformed
+
+    private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        RecepientTableDisplay form= new RecepientTableDisplay();
+        form.setVisible(true);
+    }//GEN-LAST:event_displayActionPerformed
 
     /**
      * @param args the command line arguments
