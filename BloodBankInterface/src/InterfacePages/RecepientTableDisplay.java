@@ -33,7 +33,7 @@ public class RecepientTableDisplay extends javax.swing.JFrame {
         String email;
         String address;
         String blood_type;
-        int quantity;
+        double quantity;
         String date_of_requirement;
         String hospital_id;
         String hospital_name;
@@ -42,9 +42,9 @@ public class RecepientTableDisplay extends javax.swing.JFrame {
             String url = "jdbc:postgresql://localhost:5432/BloodBankManagementSystem";
             Properties parameters = new Properties();
             parameters.put("user", "postgres");
-	    parameters.put("password", "");
+	    parameters.put("password", "root");
             connector = DriverManager.getConnection(url, parameters);
-            pst = connector.prepareStatement("SELECT * FROM recepient;");
+            pst = connector.prepareStatement("SELECT * FROM \"public\".recipient;");
             ResultSet r = pst.executeQuery();
             DefaultTableModel m=(DefaultTableModel)recepientdisplay.getModel();
             if(m.getRowCount()>0)
@@ -54,13 +54,13 @@ public class RecepientTableDisplay extends javax.swing.JFrame {
                 name= r.getString(2);
                 age=r.getInt(3);
                 phone_number= r.getString(4);
-                sex=r.getString(5);
-                date_of_birth=r.getString(6);
-                email=r.getString(7);
-                address= r.getString(8);
-                blood_type= r.getString(9);
-                quantity= r.getInt(10);
-                date_of_requirement=r.getString(11);
+                address= r.getString(5);
+                blood_type= r.getString(6);
+                quantity= r.getDouble(7);
+                date_of_requirement=r.getString(8);
+                sex=r.getString(9);
+                email=r.getString(10);
+                date_of_birth=r.getString(11);
                 hospital_id=r.getString(12);
                 hospital_name=r.getString(13);
 

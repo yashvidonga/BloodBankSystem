@@ -33,16 +33,16 @@ public class DonorTableDisplay extends javax.swing.JFrame {
         String email;
         String address;
         String blood_type;
-        int quantity;
+        double quantity;
         String date_of_donation;
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/BloodBankManagementSystem";
             Properties parameters = new Properties();
             parameters.put("user", "postgres");
-	    parameters.put("password", "");
+	    parameters.put("password", "root");
             connector = DriverManager.getConnection(url, parameters);
-            pst = connector.prepareStatement("SELECT * FROM donor;");
+            pst = connector.prepareStatement("SELECT * FROM \"public\".donor;");
             ResultSet r = pst.executeQuery();
             DefaultTableModel m=(DefaultTableModel)donortbdisplay.getModel();
             if(m.getRowCount()>0)
@@ -52,14 +52,14 @@ public class DonorTableDisplay extends javax.swing.JFrame {
                 name= r.getString(2);
                 age=r.getInt(3);
                 phone_number= r.getString(4);
-                sex=r.getString(5);
-                date_of_birth=r.getString(6);
-                email=r.getString(7);
-                address= r.getString(8);
-                blood_type= r.getString(9);
-                quantity= r.getInt(10);
-                date_of_donation=r.getString(11);
-
+                address= r.getString(5);
+                blood_type= r.getString(6);
+                quantity= r.getDouble(7);
+                date_of_donation=r.getString(8);
+                sex=r.getString(9);
+                email=r.getString(10);
+                date_of_birth=r.getString(11);
+             
                 Object[] row={donor_id,name,age,phone_number,sex,date_of_birth,email,address,blood_type,quantity,date_of_donation};
                 m.addRow(row);
             }
