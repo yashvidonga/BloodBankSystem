@@ -74,8 +74,11 @@ public class ecTableDisplay extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         ectable = new javax.swing.JTable();
+        backbt = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ectable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,25 +101,42 @@ public class ecTableDisplay extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ectable);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 54, 845, 241));
+
+        backbt.setBackground(new java.awt.Color(255, 255, 255));
+        backbt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        backbt.setText("BACK");
+        backbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 322, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 910, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        EmergencyContact form = new EmergencyContact();
+        form.setVisible(true);
+    }//GEN-LAST:event_backbtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +174,9 @@ public class ecTableDisplay extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbt;
     private javax.swing.JTable ectable;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
